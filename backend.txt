@@ -1,0 +1,70 @@
+eReader Backend Setup
+
+1. Set up the project:
+ - Create a new directory for the backend
+ - Initialize a new Go module: go mod init github.com/yourusername/ereader-backend
+
+2. Install dependencies:
+ - go get github.com/gorilla/mux
+ - go get github.com/ledongthuc/pdf
+ - go get github.com/replicate/replicate-go
+ - go get github.com/uploadthing/go
+ - go get github.com/mattn/go-sqlite3
+
+3. Set up Replicate credentials:
+ - Sign up for a Replicate account at https://replicate.com
+ - Obtain your API token from the Replicate dashboard
+ - Set the REPLICATE_API_TOKEN environment variable with your token
+
+4. Set up Uploadthing credentials:
+ - Sign up for an Uploadthing account at https://uploadthing.com
+ - Obtain your API keys from the Uploadthing dashboard
+ - Set the UPLOADTHING_APP_ID and UPLOADTHING_SECRET environment variables with your keys
+
+5. Set up SQLite database:
+ - Create a new SQLite database file: touch ereader.db
+ - Set up the database schema with necessary tables (books, users, etc.)
+ - Implement database connection and query functions in your Go code
+
+6. Implement the main.go file with the following features:
+ - PDF upload endpoint (/api/upload)
+ - Text extraction from PDF
+ - Text-to-speech synthesis endpoint (/api/synthesize) using Kokoro TTS via Replicate
+ - Image upload endpoint (/api/upload-image) using Uploadthing
+ - Database operations for storing and retrieving book information
+
+7. Create a PDF processing function:
+ - Use github.com/ledongthuc/pdf to extract text from uploaded PDFs
+ - Store the extracted text in the SQLite database
+
+8. Implement the Kokoro TTS integration:
+ - Use the Replicate Go client to interact with the Kokoro TTS model
+ - Convert extracted text to speech using the Kokoro TTS model
+ - Return the generated audio file URL
+ - Store the audio file URL in the SQLite database
+
+9. Set up the Uploadthing integration:
+ - Implement the image upload functionality using the Uploadthing Go SDK
+ - Store and retrieve image URLs for book covers in the SQLite database
+
+10. Create API endpoints:
+ - POST /api/upload: Handle PDF uploads, text extraction, and store in database
+ - POST /api/synthesize: Generate speech from extracted text and update database
+ - POST /api/upload-image: Handle image uploads for book covers and update database
+ - GET /api/books: Retrieve a list of uploaded books with their details from database
+ - GET /api/book/{id}: Retrieve a specific book's details from database
+
+11. Implement database operations:
+ - Create functions for inserting, updating, and querying book information
+ - Implement user management (if required) using the SQLite database
+ - Ensure proper error handling for database operations
+
+12. Implement error handling and logging throughout the application
+
+13. Run the backend:
+ - go run main.go
+
+Note: Ensure that the backend is running on the correct port (default: 8080) and that the frontend is configured to make API calls to the correct backend URL.
+
+Remember to handle authentication and authorization for your API endpoints to secure your application. Also, make sure to properly manage database connections and implement connection pooling if necessary for better performance.
+
