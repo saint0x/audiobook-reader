@@ -47,6 +47,7 @@
     "framer-motion": "latest",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
+    "my-v0-project": ".",
     "next": "14.2.16",
     "next-themes": "latest",
     "react": "^18",

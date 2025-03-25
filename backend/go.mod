@@ -1,6 +1,8 @@
 module backend
 
-go 1.21
+go 1.23.0
+
+toolchain go1.24.1
 
 require (
 	github.com/google/uuid v1.6.0
@@ -11,3 +13,5 @@ require (
 )
 
 require github.com/gorilla/websocket v1.5.3
+
+require golang.org/x/crypto v0.36.0
